@@ -17,7 +17,7 @@ def predict():
     int_features = [int(x) for x in request.form.values()]
     final_features = [np.array(int_features)]
     #prediction = model.predict(final_features)
-     output=0.9  
+    output=0.9  
     #output = prediction[0]
 
     return render_template('index.html', prediction_text='CHD would be  $ {}'.format(output))
