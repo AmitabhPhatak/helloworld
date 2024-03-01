@@ -1,10 +1,8 @@
-from flask import Flask
-import os
+import numpy as np
 from flask import Flask, request, jsonify, render_template
 import pickle
 
-
-app = Flask(__name__)
+app = Flask(__name__,template_folder='/app')
 model = pickle.load(open('model_lr_ch1.pkl', 'rb'))
 
 @app.route('/')
@@ -31,4 +29,5 @@ def results():
     output = prediction[0]
     return jsonify(output)
 
-    app.run(port=port,host='0.0.0.0')
+if __name__ == "__main__":
+    app.run(debug=True)
