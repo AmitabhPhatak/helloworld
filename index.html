@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html >
+<head>
+  <meta charset="UTF-8">
+  <title>Deployment Tutorial 1</title>
+  <link href='https://fonts.googleapis.com/css?family=Pacifico' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Arimo' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Hind:300' rel='stylesheet' type='text/css'>
+<link href='https://fonts.googleapis.com/css?family=Open+Sans+Condensed:300' rel='stylesheet' type='text/css'>
+<link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  
+</head>
+
+<body style="background: #020;">
+ <div class="login">
+	<h1>CHD Prediction</h1>
+
+     <!-- Main Input For Receiving Query to our ML -->
+    <form action="{{ url_for('predict')}}"method="post">
+    	<input type="text" name="male" placeholder="male" required="required" />
+        <input type="text" name="age" placeholder="age" required="required" />
+		<input type="text" name="currentSmoker" placeholder="currentSmoker" required="required" />
+
+<input type="text" name="cigsPerDay" placeholder="cigsPerDay" required="required" />
+
+<input type="text" name="BPMeds" placeholder="BPMeds" required="required" />
+
+<input type="text" name="prevalentStroke" placeholder="prevalentStroke" required="required" />
+<input type="text" name="prevalentHyp" placeholder="prevalentHyp" required="required" />
+<input type="text" name="diabetes" placeholder="diabetes" required="required" />
+
+<input type="text" name="totChol" placeholder="totChol" required="required" />
+<input type="text" name="sysBP" placeholder="sysBP" required="required" />
+<input type="text" name="diaBP" placeholder="diaBP" required="required" />
+<input type="text" name="BMI" placeholder="BMI" required="required" />
+<input type="text" name="heartRate" placeholder="heartRate" required="required" />
+<input type="text" name="glucose" placeholder="glucose" required="required" />
+
+
+
+        <button type="submit" class="btn btn-primary btn-block btn-large">Predict CHD</button>
+    </form>
+
+   <br>
+   <br>
+   {{ prediction_text }}
+
+ </div>
+</body>
+</html>
