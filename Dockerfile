@@ -1,21 +1,22 @@
-# Use an official Python runtime as a parent image
-FROM python:3.8
+FROM registry.access.redhat.com/ubi9/python-39:1-117.1684741281
 
-# Set the working directory to /app
-WORKDIR /app
-
-# Copy the current directory contents into the container at /app
-COPY . /app
-
-# Install any needed packages specified in requirements.txt
-RUN pip3 install --trusted-host pypi.python.org -r requirements.txt
-
-# Make port 8050 available to the world outside this container
+# By default, listen on port 8081
 EXPOSE 8081/tcp
 ENV FLASK_PORT=8081
 
-# Define environment variable
-ENV NAME World
+# Set the working directory in the container
+WORKDIR /app
 
-# Run app.py when the container launches
-CMD ["python", "app.py"]
+# Copy the content of the local src directory to the working directory
+COPY . .
+
+# Install any dependencies
+RUN \
+  if [ -f requirements.txt ]; \
+    then pip install -r requirements.txt; \
+  elif [ `ls -1q *.txt | wc -l` == 1 ]; \
+    then pip install -r *.txt; \
+  fi
+
+# Specify the command to run on container start
+CMD [ "python", "./app.py" ]
